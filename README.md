@@ -4,6 +4,12 @@ Curated local demo and experimental diffusion source. This repository is **publi
 
 ## Run the app
 
+**[Download the local app ZIP](https://github.com/iamdarshg/drone-portfolio-delivery/raw/refs/heads/main/downloads/DroneEngineering-local-app.zip)** (590,806 bytes). This is the exact final upload package, SHA256 `a835a82034a8fe632ce55a72d7deb783cb8dd7106c691318195cb26e8851cc31`.
+
+Extract the ZIP, then open a terminal inside its `DroneEngineering` folder. Nothing runs automatically. On Windows run `py -3 serve.py`; on Linux/macOS run `python3 serve.py` (Python 3.10+). Open the loopback URL printed by the server. Alternatively, manually launch the included `Start.cmd` (Windows), `Start.command` (macOS), or `bash Start.sh` (Linux). Review scripts before running them. Git is optional for viewing the app; install Git only if you want the clone helpers. No weights are included and no completed fine-tuned LoRA is claimed.
+
+Public code URL for screenshot captions: **https://github.com/iamdarshg/drone-portfolio-delivery**. If the submission portal accepts only images/video, use that URL in the caption rather than attaching this ZIP to the portal.
+
 Python 3.10+; no third-party Python packages are required for the local server.
 
 ```sh
