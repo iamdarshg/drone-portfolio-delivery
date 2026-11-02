@@ -1,0 +1,8 @@
+# Tested import subset, not upstream's full all-architectures dependency lock.
+# Installed --no-deps in E:/OneLine_diffusion/trainer_venv, inherited host Torch.
+# Full runtime compatibility is established by smoke tests, not this file alone.
+diffusers==0.35.2
+av==17.1.0
+einops==0.7.0
+voluptuous==0.15.2
+easydict==1.13

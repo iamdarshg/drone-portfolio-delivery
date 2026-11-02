@@ -1,0 +1,146 @@
+{
+  "repositories": [
+    {
+      "name": "drone-arm",
+      "commit": "fc80ded19dd070b476866e84de6c872ee3480d89",
+      "branch": "main",
+      "files": [
+        {
+          "path": "README.md",
+          "cache": "assets/drone-arm-0.txt",
+          "sha256": "23932a1bdfa026f995b14e618385242ed342640fbff662adeec909e2947828cb"
+        },
+        {
+          "path": "RELEASE_STATUS.md",
+          "cache": "assets/drone-arm-1.txt",
+          "sha256": "b241321bc45be98798c2b1e3e3331b492ba1758a867482e0ad7931125e3a1d13"
+        },
+        {
+          "path": "docs/hardware/VALIDATION_MATRIX.md",
+          "cache": "assets/drone-arm-2.txt",
+          "sha256": "471f4e2003d93b62d2bfa91cd2ebec859c8182fb4936b7d1b185348bc0780568"
+        },
+        {
+          "path": "hardware/motor_release/FA4119_PROPULSION_DECISION.md",
+          "cache": "assets/drone-arm-3.txt",
+          "sha256": "4aab18907da2c7e090a91c5f28c928a59c423dd35c05a7fae0f6f2e206f0135a"
+        },
+        {
+          "path": "engineering_acceptance/cli.py",
+          "cache": "assets/drone-arm-code.txt",
+          "sha256": "d47afb8c97807fbf9085302ee84d55e98f507c62b6598774e520f282bffdf711"
+        }
+      ]
+    },
+    {
+      "name": "drone-mech",
+      "commit": "81b1d20b0f45bd3c3c0118628c7bbb73a788c24e",
+      "branch": "main",
+      "files": [
+        {
+          "path": "highspeed_edf/deliverables/phase15_geometry/reports/phase15_geometry_manufacturing_report.md",
+          "cache": "assets/drone-mech-0.txt",
+          "sha256": "678225dda135d9b55696641ced19613f64194d55c1fdfc7dab55e8db073a075c"
+        },
+        {
+          "path": "highspeed_edf/deliverables/phase12/phase12_generate.py",
+          "cache": "assets/drone-mech-1.txt",
+          "sha256": "c2d5fbf0251edf6ba8b7ab24b801282fb4ccef3f1b78bb6e658e2039fe94f2c3"
+        },
+        {
+          "path": "highspeed_edf/deliverables/phase13/render_phase12_visual.py",
+          "cache": "assets/drone-mech-2.txt",
+          "sha256": "72fcf22aa479b6d42237deb00b30e51f51fb69d02edd8d0340e1358bb3c53f83"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "assets/esc_final_top.png",
+      "source": "hardware/esc/rev_b/reports/esc_final_top.png",
+      "sha256": "5baf7432e819cb65aa299bad0f0a8de00e0ffb0c7a5c38bea7108a62993bb625",
+      "kind": "Existing PCB render, not a photograph",
+      "last_path_commit": null,
+      "note": "Local source bytes hashed; render does not establish current-board release readiness."
+    },
+    {
+      "file": "assets/esc_final_bottom.png",
+      "source": "hardware/esc/rev_b/reports/esc_final_bottom.png",
+      "sha256": "7caa5fe5c8495f5e118e8769db5cfb58c464915a805a07bf941f1486f1977ddd",
+      "kind": "Existing PCB render, not a photograph",
+      "last_path_commit": null,
+      "note": "Local source bytes hashed; render does not establish current-board release readiness."
+    },
+    {
+      "file": "assets/duct_A_rotor_R1_N13.stl",
+      "sha256": "baf3423789828acc52b63bc5f28abc36b3e7e9fdfa630a25895a73d7ccb6645d",
+      "source_step": "highspeed_edf/deliverables/phase15_geometry/step/duct_A_rotor_R1_N13.step",
+      "source_step_sha256": "6f964563de6ef122520bfa6afef2167b939695e071ed3d9b33efa6c9e500e67b",
+      "source_repository": "drone-mech",
+      "last_path_commit": "832fa222671e115b6ae0b36580ddeeae01a5322e",
+      "step_matches_commit": true,
+      "derivation": "Existing OneLine/prepare_film_assets.py: CadQuery importStep; export tolerance=0.08, angularTolerance=0.15; full solid (no section cutter). STL bytes copied unchanged, not regenerated.",
+      "status": "Phase-15 rotor concept; packaging collisions unresolved"
+    },
+    {
+      "file": "assets/real_motor_housing.stl",
+      "sha256": "76ae1d775d864ed90522c137cf81dc9ae03a3059f6e403003d97e34dc83086f8",
+      "source_step": "hardware/motor_release/stator_housing.step",
+      "source_step_sha256": "59a68f682a0d393baf7dbb468dbd3e17a8fc7de5ba6a2400a4205a67693cbf13",
+      "source_repository": "drone-arm",
+      "last_path_commit": "c25a07011c5a9769aeb874c313924a4dba839811",
+      "step_matches_commit": false,
+      "derivation": "Existing OneLine/prepare_film_assets.py: CadQuery importStep; export tolerance=0.08, angularTolerance=0.15; full solid (no section cutter). STL bytes copied unchanged, not regenerated.",
+      "status": "Historical superseded custom motor CAD"
+    },
+    {
+      "file": "assets/duct_A_82OD_78ID_L110.stl",
+      "sha256": "55a43a42c0960dfeefd140b734bb09824a777cad420c0a7beb77a5f2c7fc94e0",
+      "source_step": "D:\\CodeProjects\\drone-mech\\highspeed_edf\\deliverables\\phase15_geometry\\step\\duct_A_82OD_78ID_L110.step",
+      "source_step_sha256": "82f92fdb3c6748915cbfc1fc424e53171d89965129bcf390db19849f8c218d2a",
+      "derivation": "Existing OneLine prepare_film_assets.py; full STEP solid export tolerance 0.08, angularTolerance 0.15; copied unchanged",
+      "status": "Phase-15 duct concept; integration unresolved",
+      "step_matches_commit": false,
+      "note": "Source manifest hash retained; historical commit association not verified for this selected asset"
+    },
+    {
+      "file": "assets/real_motor_bell.stl",
+      "sha256": "6982630f01b8de0c11c61fedaf70b85693d7bf82b7de5bd7f834f65430864043",
+      "source_step": "D:\\CodeProjects\\drone-arm\\hardware\\motor_release\\rotor_bell.step",
+      "source_step_sha256": "ef574290c494f9ae5bbd4f2a92c9d98ee591c30a1b90f90589f84873b7ed3152",
+      "derivation": "Existing OneLine prepare_film_assets.py; full STEP solid export tolerance 0.08, angularTolerance 0.15; copied unchanged",
+      "status": "Historical custom motor \u2014 superseded",
+      "step_matches_commit": false,
+      "note": "Source manifest hash retained; historical commit association not verified for this selected asset"
+    }
+  ],
+  "checks": [
+    {
+      "url": "https://api.github.com/repos/iamdarshg/drone-arm",
+      "status": 200,
+      "private": false
+    },
+    {
+      "url": "https://github.com/iamdarshg/drone-arm",
+      "status": 200
+    },
+    {
+      "url": "https://api.github.com/repos/iamdarshg/drone-arm/commits/fc80ded19dd070b476866e84de6c872ee3480d89",
+      "status": 200
+    },
+    {
+      "url": "https://api.github.com/repos/iamdarshg/drone-mech",
+      "status": 200,
+      "private": false
+    },
+    {
+      "url": "https://github.com/iamdarshg/drone-mech",
+      "status": 200
+    },
+    {
+      "url": "https://api.github.com/repos/iamdarshg/drone-mech/commits/81b1d20b0f45bd3c3c0118628c7bbb73a788c24e",
+      "status": 200
+    }
+  ]
+}

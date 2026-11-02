@@ -1,0 +1,7 @@
+{
+  "policy": "Optional live supplements; not frozen deadline evidence. Uploads are not performed by this demo. Institutional late-update policy unknown.",
+  "photos": [
+    {"repository": "drone-arm", "branch": "main", "path": "docs/media/build/01-board-assembly.jpg", "displayName": "Board assembly", "status": "WIP — photo not supplied at snapshot", "captureDate": null, "contribution": "Owner must supply photographer and personal assembly contribution before upload.", "caption": "Optional physical board assembly photograph; no successful electrical test is implied."},
+    {"repository": "drone-mech", "branch": "main", "path": "docs/media/build/01-airframe-assembly.jpg", "displayName": "Airframe assembly", "status": "WIP — photo not supplied at snapshot", "captureDate": null, "contribution": "Owner must supply photographer and personal fabrication contribution before upload.", "caption": "Optional physical airframe assembly photograph; no resolved packaging or flight test is implied."}
+  ]
+}

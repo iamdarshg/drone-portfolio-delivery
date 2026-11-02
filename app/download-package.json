@@ -1,0 +1,8 @@
+{
+  "zip": "E:\\OneLine_final_media\\app\\DroneEngineering-local-app.zip",
+  "bytes": 588644,
+  "sha256": "1ce0e7ac346b0264765ef0f19be97307d3824116eee060ead862127f8de9eb2c",
+  "entry_point": "DroneEngineering/Start.cmd",
+  "requires": "Python 3.10+",
+  "public_deployment": false
+}

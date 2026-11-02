@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "assets": [
+    {
+      "id": "rotor_bell",
+      "repo": "iamdarshg/drone-arm",
+      "commit": "fc80ded19dd070b476866e84de6c872ee3480d89",
+      "path": "hardware/motor_release/rotor_bell.step",
+      "size": 198557,
+      "sha256": "719dff49118d26f5586fb4922496c61a679d2648deba2238e8abecab3fee536b",
+      "subject": "electric motor rotor bell"
+    },
+    {
+      "id": "stator_housing",
+      "repo": "iamdarshg/drone-arm",
+      "commit": "fc80ded19dd070b476866e84de6c872ee3480d89",
+      "path": "hardware/motor_release/stator_housing.step",
+      "size": 9440,
+      "sha256": "88d97c68f47596346f7c34ab2186ef093e4ab20f431107e671bcb7f9f843115d",
+      "subject": "electric motor stator housing"
+    },
+    {
+      "id": "lifting_wing_left",
+      "repo": "iamdarshg/drone-mech",
+      "commit": "81b1d20b0f45bd3c3c0118628c7bbb73a788c24e",
+      "path": "highspeed_edf/deliverables/phase15_geometry/step/lifting_wing_left_sector_with_duct_and_elevon_reliefs.step",
+      "size": 713596,
+      "sha256": "b1fb7cd66f98e8b5e9c65ecb25c703993bb32218cf2ada2c3baa3d1559e7121b",
+      "subject": "aircraft left lifting wing sector with duct and elevon reliefs"
+    }
+  ]
+}

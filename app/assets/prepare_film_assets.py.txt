@@ -1,0 +1,47 @@
+"""Export named source solids: no surrogate motors or fan spokes."""
+import hashlib
+import json
+from pathlib import Path
+
+import cadquery as cq
+
+HERE = Path(__file__).resolve().parent
+SOURCE = Path(r"D:\CodeProjects\drone-mech\highspeed_edf\deliverables\phase15_geometry\step")
+MOTOR = Path(r"D:\CodeProjects\drone-arm\hardware\motor_release")
+OUT = HERE / "assets" / "film_parts"
+OUT.mkdir(parents=True, exist_ok=True)
+PARTS = [
+    "fuselage_battery_bay_shell",
+    "lifting_wing_centre_bridge_sector_with_duct_and_elevon_reliefs",
+    "lifting_wing_left_sector_with_duct_and_elevon_reliefs",
+    "lifting_wing_right_sector_with_duct_and_elevon_reliefs",
+    "canted_tail_fin_left_70x90", "canted_tail_fin_right_70x90_with_rudder_cut",
+    "twin_carbon_tail_support_booms", "elevon_left_40x150", "elevon_right_40x150",
+]
+for side in "AB":
+    PARTS += [f"duct_{side}_82OD_78ID_L110", f"duct_{side}_rotor_R1_N13",
+              f"duct_{side}_side_inlet_100mm", f"duct_{side}_separate_nozzle_and_exit_lip"]
+
+manifest = {"basis": "Phase-15 exterior; single-stage cutaway concept using drone-arm source motor.",
+            "integration": "Source motor assembly is exploded sideways by 80mm. Separate bell/housing are imported coaxially at original millimetre scale. This film is not a validated propulsion redesign.",
+            "parts": []}
+
+for name, src in [(n, SOURCE / (n + ".step")) for n in PARTS] + [
+        ("real_motor_housing", MOTOR / "stator_housing.step"),
+        ("real_motor_bell", MOTOR / "rotor_bell.step")]:
+    shape = cq.importers.importStep(str(src))
+    dst = OUT / (name + ".stl")
+    cq.exporters.export(shape, str(dst), tolerance=0.08, angularTolerance=0.15)
+    manifest["parts"].append({"name": name, "source": str(src),
+                              "sha256": hashlib.sha256(src.read_bytes()).hexdigest()})
+    print(name, flush=True)
+    # Remove the camera-facing upper quadrant for a genuine sectional view.
+    if name in ("fuselage_battery_bay_shell", "duct_A_82OD_78ID_L110", "duct_A_side_inlet_100mm"):
+        cutter = cq.Workplane("XY").box(1000, 500, 2000).translate((-500, 250, 0))
+        section = shape.cut(cutter)
+        cq.exporters.export(section, str(OUT / (name + "_section.stl")), tolerance=0.08, angularTolerance=0.15)
+    if name in ("real_motor_housing", "real_motor_bell"):
+        cutter = cq.Workplane("XY").box(100, 100, 200).translate((-50, 50, 50))
+        cq.exporters.export(shape.cut(cutter), str(OUT / (name + "_section.stl")), tolerance=0.04, angularTolerance=0.15)
+
+(OUT / "manifest.json").write_text(json.dumps(manifest, indent=2))
