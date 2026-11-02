@@ -25,6 +25,14 @@ Use the loopback URL printed by the server. The demo includes bundled engineerin
 
 `diffusion_work/` contains a pretrained Wan text-to-video pipeline, CPU training orchestration harness, and CAD-to-text prompt fallback. **No completed fine-tuned LoRA exists or is included.** CAD metadata becomes text; this is not geometric CAD-conditioned diffusion. Byte-identical replay is copying, not generation. The film is not represented as diffusion output.
 
+### Diffusion model: what was built and what was demonstrated
+
+The experimental loader targets the compact **Wan 2.1 T2V 1.3B** split-file bundle (about **9.83 GB** total): BF16 video denoiser, scaled-FP8 UMT5 text encoder, and Wan VAE. The implementation uses ComfyUI's pinned Wan text-encoder detection code because the scaled-FP8 encoder is not assumed to be a standard Diffusers checkpoint. The loader/import compatibility check is distinct from successful prompt encoding or video generation. The bundle is external and is not stored in this repository.
+
+The T2V smoke run used pretrained weights only: text prompt plus random latent initialization, 320×192, 17 frames, 16 fps, 12 sampling steps. Its output was an abstract linework clip that did not reach the target engineering sequence and readable-name. It is a deferred feasibility experiment—not a showcase result, not an image-conditioned run, and not the OneLine Blender film. No fine-tuned adapter/checkpoint was produced. The LoRA harness and CAD-to-text prompt tools are research prototypes; they do not establish trained-model performance or geometric CAD conditioning.
+
+To inspect the complete evidence, setup constraints, command references, current status, and proposed next experiments, see [`diffusion_work/README.md`](diffusion_work/README.md), [`diffusion_work/lora_harness/README.md`](diffusion_work/lora_harness/README.md), and [`diffusion_work/cad_conditioning/README.md`](diffusion_work/cad_conditioning/README.md). In particular, model downloads require a separately prepared Windows E: storage layout and roughly 9.83 GB of model files; do not start a download or GPU run just to browse this repository.
+
 Start with the component READMEs. The inference setup expects a separately provisioned Windows E: bulk-storage directory, pinned ComfyUI checkout, external pretrained model downloads (approximately 9.83 GB), and suitable GPU resources. Those dependencies are deliberately not shipped. Do not run downloads or GPU jobs merely to view the app.
 
 CPU-only checks from the repository root:
