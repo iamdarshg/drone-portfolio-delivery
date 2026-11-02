@@ -1,6 +1,6 @@
 # Darsh single-film memorization harness
 
-**Implemented CPU orchestration, not a trained adapter. `train` currently fails closed.**
+**Implemented CPU orchestration, not a trained adapter. `train` remains gated until model, data, and trainer preflight checks are satisfied.**
 Only this directory was edited. Inference/download workers and film originals are untouched.
 No new model weights, trainer checkout, dependencies, or GPU jobs are installed/launched here.
 
@@ -32,7 +32,7 @@ video-container bytes. LoRA cannot promise either exact pixels or the original e
 All datasets, normalized films, clips, frame checksums, model caches, checkpoints, logs,
 metrics, bridge outputs, test temp files and future trainer environment live under
 `E:/OneLine_diffusion/`. Sources can be read from D: but are never overwritten/moved.
-`prepare` exclusively creates a new run directory and refuses existing runs. Failures leave
+`prepare` exclusively creates a new run directory and refuses existing runs. Interrupted runs leave
 partial artifacts for inspection; no recursive cleanup. `replay` and metric JSON use exclusive
 creation. Preflight is read-only and performs no ML imports/GPU allocations or directory creation.
 

@@ -87,7 +87,7 @@ def main():
             config.update(status="inference_completed", seconds=time.perf_counter()-start,
                           warning="Short low-resolution pretrained smoke test, not a trained adapter or validated full narrative")
         except Exception:
-            config.update(status="failed", seconds=time.perf_counter()-start, error=traceback.format_exc())
+            config.update(status="inference_error", seconds=time.perf_counter()-start, error=traceback.format_exc())
             raise
         finally:
             record.write_text(json.dumps(config, indent=2))

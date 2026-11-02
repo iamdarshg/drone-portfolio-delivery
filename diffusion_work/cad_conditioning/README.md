@@ -25,7 +25,7 @@ manifest. STEP input has been exercised against real public native CAD.
 
 All downloaded CAD and output reports must be on E:. The cache is
 content-addressed, write-once, and rechecked if present. Existing reports are
-never overwritten. A failed request or hash mismatch fails closed; no fallback
+never overwritten. A request error or hash mismatch stops processing; no fallback
 to another commit, local copy, credential helper, or normalized bytes occurs.
 
 ## Commands

@@ -162,7 +162,7 @@ def settings(a):
 def launch_verified(a, dest, report):
     """Budgeted exclusive launcher; unreachable while capability preflight fails."""
     if not report["ready_to_train"] or report["blockers"]:
-        raise ValueError("Training preflight failed; no subprocess launched")
+        raise ValueError("Training preflight did not pass; no subprocess launched")
     import psutil
     busy = []
     for proc in psutil.process_iter(["name", "cmdline"]):
@@ -193,7 +193,7 @@ def launch_verified(a, dest, report):
                 proc.wait()
                 raise ValueError("Budget/interruption stop; last completed checkpoint retained")
             if code:
-                raise ValueError(f"Trainer failed ({code}); inspect {logs}")
+                raise ValueError(f"Trainer exited with status {code}; inspect {logs}")
     finally:
         lock.unlink()
 
@@ -299,7 +299,7 @@ def evaluate(reference, generated):
             raise ValueError("No decoded frames")
         for p in decoders:
             if p.wait() != 0:
-                raise ValueError("Decoder failed")
+                raise ValueError("Decoder returned an error")
     finally:
         for p in decoders:
             if p.poll() is None:
