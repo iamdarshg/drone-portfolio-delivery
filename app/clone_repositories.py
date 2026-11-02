@@ -15,8 +15,11 @@ def git_environment():
     environment={key:value for key,value in os.environ.items() if not key.startswith('GIT_')}
     environment.update({'GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':os.devnull,'GIT_TERMINAL_PROMPT':'0'})
     return environment
-def run(destination, dry_run=False, repo_url=None):
+def run(destination, dry_run=False, repo_url=None, delivery=False):
     destination=Path(destination).expanduser().resolve()
+    if delivery:
+        manifest=json.loads((Path(__file__).resolve().parent/'SOURCE_REPOSITORY.json').read_text())
+        repo_url=manifest['clone_url']
     repositories=[(name,'https://github.com/iamdarshg/'+name+'.git') for name in REPOS]
     if repo_url:
         match=re.fullmatch(r'https://github\.com/iamdarshg/([A-Za-z0-9_-][A-Za-z0-9_.-]*?)(?:\.git)?',repo_url)
@@ -27,11 +30,23 @@ def run(destination, dry_run=False, repo_url=None):
             print(json.dumps({'destination':str(destination/name),'command':command('clone','--no-recurse-submodules','--',url,str(destination/name))}))
         return 0
     if not shutil.which('git'):
-        print('Git is not installed. No repositories changed. Install Git manually or download source ZIPs:')
+        print('Git is not installed. No repositories changed. Install Git manually or use GitHub:')
         for name,url in repositories:print('https://github.com/iamdarshg/'+name+' (Code > Download ZIP)')
         return 1
     destination.mkdir(parents=True,exist_ok=True)
     records=[]
+    auth=[]
+    if delivery and manifest.get('visibility') != 'public':
+        print('Repository credentials may be required by the recorded access policy.')
+        if shutil.which('gh'):
+            auth=['-c','credential.helper=','-c','credential.helper=!gh auth git-credential']
+        else:
+            # Reuse only standard OS credential helpers; no tokens are read or stored here.
+            try:
+                helper=subprocess.check_output(['git','config','--global','--get','credential.helper'],text=True,timeout=10).strip()
+                if helper in {'manager','manager-core','osxkeychain','libsecret','wincred','cache','store'}:auth=['-c','credential.helper='+helper]
+            except (subprocess.SubprocessError,OSError):pass
+        print('If authentication fails, sign in normally (gh auth login) or configure Git credentials; then retry in a new destination. No token is embedded.')
     for name,url in repositories:
         target=destination/name
         if target.exists():
@@ -39,7 +54,7 @@ def run(destination, dry_run=False, repo_url=None):
             records.append({'repository':name,'status':'skipped-existing','destination':str(target)})
             continue
         try:
-            subprocess.run(command('clone','--no-recurse-submodules','--',url,str(target)),check=True,timeout=600,env=git_environment())
+            subprocess.run(command(*auth,'clone','--no-recurse-submodules','--',url,str(target)),check=True,timeout=600,env=git_environment())
             commit=subprocess.check_output(command('-C',str(target),'rev-parse','HEAD'),text=True,timeout=15,env=git_environment()).strip()
             records.append({'repository':name,'status':'cloned','destination':str(target),'commit':commit,'fetched_at':datetime.now(timezone.utc).isoformat()})
             print(name,commit)
@@ -55,5 +70,6 @@ if __name__=='__main__':
     parser.add_argument('--destination',type=Path,default=Path(__file__).resolve().parent/'repos')
     parser.add_argument('--dry-run',action='store_true')
     parser.add_argument('--repo-url',help='Explicit delivery repository HTTPS URL owned by iamdarshg; no URL is guessed')
+    parser.add_argument('--delivery',action='store_true',help='Clone the public delivery repository recorded in SOURCE_REPOSITORY.json')
     args=parser.parse_args()
-    raise SystemExit(run(args.destination,args.dry_run,args.repo_url))
+    raise SystemExit(run(args.destination,args.dry_run,args.repo_url,args.delivery))

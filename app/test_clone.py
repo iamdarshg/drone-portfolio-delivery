@@ -4,6 +4,13 @@ from unittest.mock import patch
 import clone_repositories as clone
 
 class CloneTests(unittest.TestCase):
+ def test_delivery_manifest_and_clone_failure(self):
+  with tempfile.TemporaryDirectory() as folder,patch.object(clone.shutil,'which',return_value='tool'),patch.object(clone.subprocess,'run',side_effect=clone.subprocess.CalledProcessError(128,['git'])) as command:
+   self.assertEqual(clone.run(folder,True,delivery=True),0);command.assert_not_called()
+   self.assertEqual(clone.run(folder,delivery=True),1)
+   args=command.call_args.args[0]
+   self.assertIn('https://github.com/iamdarshg/drone-portfolio-delivery.git',args)
+   self.assertNotIn('credential.helper=!gh auth git-credential',args)
  def test_delivery_url_and_paths(self):
   with tempfile.TemporaryDirectory(prefix='source space ') as folder,patch.object(clone.subprocess,'run') as run:
    self.assertEqual(clone.run(Path(folder)/'nested destination',True,'https://github.com/iamdarshg/delivery-source.git'),0);run.assert_not_called()

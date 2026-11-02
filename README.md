@@ -1,6 +1,6 @@
 # Drone engineering delivery
 
-Curated local demo and experimental diffusion source. This repository is **private**: cloning requires the owner account or an explicitly invited GitHub collaborator. It is not a public website. No credentials, model weights, caches, local test screenshots, or generated training datasets are bundled.
+Curated local demo and experimental diffusion source. This repository is **public** and can be cloned without authentication. The app runs locally; no hosted backend is provided. No credentials, model weights, caches, local test screenshots, or generated training datasets are bundled.
 
 ## Run the app
 

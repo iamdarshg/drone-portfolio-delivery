@@ -1,0 +1,13 @@
+{
+  "repository_url": "https://github.com/iamdarshg/drone-portfolio-delivery",
+  "clone_url": "https://github.com/iamdarshg/drone-portfolio-delivery.git",
+  "visibility": "public",
+  "status": "pushed main successfully",
+  "commit": "18a605a",
+  "clone_command": "gh repo clone iamdarshg/drone-portfolio-delivery",
+  "run_command": "cd drone-portfolio-delivery/app && python serve.py",
+  "scan": "61 curated files, 1062239 bytes; no secret or email findings",
+  "access": "Public repository; HTTPS cloning requires no login. Repository availability is separate from app web hosting.",
+  "video_status": "v10s full encode pending verification; superseded v10r excluded",
+  "diffusion_status": "experimental pretrained pipeline and training harness; no fine-tuned LoRA exists"
+}
